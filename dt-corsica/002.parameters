@@ -1,0 +1,8 @@
+SCENARIO=CORSICA
+processes=4
+hts=entd
+sampling_rate=0.001
+random_seed=1234
+java_memory=8G
+output_id=output_
+TRANSFER_INPUT_TO_OUTPUT=TRUE
