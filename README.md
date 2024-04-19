@@ -2,6 +2,7 @@
 
 This is a prototype on how to share a DT. 
 
+```mermaid
 graph LR
     SwitchDatabase[Switch Database] --> EqasimDataloader[Eqasim Dataloader]
 
@@ -11,7 +12,7 @@ graph LR
         EqasimDataloader --> EqasimMatsim
         EqasimMatsim --> TravelDataDashboard[Travel Data Dashboard]
     end
-
+```
 ## Tutorial
 
 1. Clone this repository
