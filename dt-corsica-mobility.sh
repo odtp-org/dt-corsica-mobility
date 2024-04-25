@@ -23,7 +23,7 @@ odtp new odtp-component-entry \
 
 odtp new odtp-component-entry \
 --name odtp-travel-data-dashboard \
---component-version v0.1.0 \
+--component-version v0.1.1 \
 --repository https://github.com/odtp-org/odtp-travel-data-dashboard
 
 # Creating new digital twin
@@ -35,7 +35,7 @@ odtp new digital-twin-entry \
 odtp new execution-entry \
 --name ${EXECUTION_NAME} \
 --digital-twin-name ${DIGITAL_TWIN_NAME} \
---component-tags odtp-eqasim-dataloader:v0.3.1,odtp-eqasim:v0.4.2,odtp-eqasim-matsim:v0.1.2,odtp-travel-data-dashboard:v0.1.0 \
+--component-tags odtp-eqasim-dataloader:v0.3.1,odtp-eqasim:v0.4.2,odtp-eqasim-matsim:v0.1.2,odtp-travel-data-dashboard:v0.1.1 \
 --parameter-files ${DT_PATH}/dt-corsica/001.parameters,${DT_PATH}/dt-corsica/002.parameters,${DT_PATH}/dt-corsica/003.parameters,${DT_PATH}/dt-corsica/004.parameters \
 --ports ,,,8502:8501
 
