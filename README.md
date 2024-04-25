@@ -19,4 +19,5 @@ graph LR
 2. Edit `dt-corsica/001.parameters` with the switch link that contains the original dataset. 
 3. Edit `dt-corsica/004.secrets` with the github secrets in order to retrieve the travel data dashboard private repository. 
 4. Edit `dt-corsica-mobility.sh` with the ODTP user email 
-5. Run the bash script: `bash dt-corsica-mobility.sh`
+5. Remove `.gitkeep` from execution folder: `rm dt-corsica/execution/.gitkeep`
+5. Run the bash script: `sh dt-corsica-mobility.sh`
