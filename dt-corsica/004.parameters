@@ -1,1 +1,3 @@
 output_id=output
+DATA_INPUT_OPTION=CUSTOM
+DATA_INPUT_PATH=eqasim-matsim-output/simulation_output/eqasim_legs.csv
