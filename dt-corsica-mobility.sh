@@ -8,22 +8,22 @@ EXECUTION_NAME=corsica-execution-1
 # Pulling all the components and versions
 odtp new odtp-component-entry \
 --name odtp-eqasim-dataloader \
---component-version v0.3.2 \
+--component-version v0.3.4 \
 --repository https://github.com/odtp-org/odtp-eqasim-dataloader
 
 odtp new odtp-component-entry \
 --name odtp-eqasim \
---component-version v0.4.3 \
+--component-version v0.4.4 \
 --repository https://github.com/odtp-org/odtp-eqasim.git
 
 odtp new odtp-component-entry \
 --name odtp-eqasim-matsim \
---component-version v0.1.3 \
+--component-version v0.1.4 \
 --repository https://github.com/odtp-org/odtp-eqasim-matsim
 
 odtp new odtp-component-entry \
 --name odtp-travel-data-dashboard \
---component-version v0.1.2 \
+--component-version v0.1.4 \
 --repository https://github.com/odtp-org/odtp-travel-data-dashboard
 
 # Creating new digital twin
@@ -35,7 +35,7 @@ odtp new digital-twin-entry \
 odtp new execution-entry \
 --name ${EXECUTION_NAME} \
 --digital-twin-name ${DIGITAL_TWIN_NAME} \
---component-tags odtp-eqasim-dataloader:v0.3.2,odtp-eqasim:v0.4.3,odtp-eqasim-matsim:v0.1.3,odtp-travel-data-dashboard:v0.1.2 \
+--component-tags odtp-eqasim-dataloader:v0.3.3,odtp-eqasim:v0.4.4,odtp-eqasim-matsim:v0.1.4,odtp-travel-data-dashboard:v0.1.4 \
 --parameter-files ${DT_PATH}/dt-corsica/001.parameters,${DT_PATH}/dt-corsica/002.parameters,${DT_PATH}/dt-corsica/003.parameters,${DT_PATH}/dt-corsica/004.parameters \
 --ports ,,,8502:8501
 
