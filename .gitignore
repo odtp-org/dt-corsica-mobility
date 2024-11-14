@@ -1,2 +1,3 @@
-dt-corsica/execution/*
-
+secrets/*.secrets
+execution
+.env

@@ -1,0 +1,51 @@
+services:
+  odtp-eqasim-dataloader:
+    image: caviri/odtp-eqasim-dataloader:v0.4.0
+    env_file:
+      - ./parameters/001.parameters
+      - ./secrets/001.secrets
+    volumes:
+      - ./execution/001_odtp_eqasim_dataloader_v0.4.0/odtp-input:/odtp/odtp-input
+      - ./execution/001_odtp_eqasim_dataloader_v0.4.0/odtp-output:/odtp/odtp-output
+      - ./execution/001_odtp_eqasim_dataloader_v0.4.0/odtp-logs:/odtp/odtp-logs
+
+  odtp-eqasim:
+    image: caviri/odtp-eqasim:v0.4.6
+    env_file:
+      - ./parameters/002.parameters
+    volumes:
+      - ./execution/001_odtp_eqasim_dataloader_v0.4.0/odtp-output:/odtp/odtp-input
+      - ./execution/002_odtp_eqasim_v0.4.6/odtp-output:/odtp/odtp-output
+      - ./execution/002_odtp_eqasim_v0.4.6/odtp-logs:/odtp/odtp-logs
+    depends_on:
+      odtp-eqasim-dataloader:
+        condition: service_completed_successfully
+
+  odtp-eqasim-matsim:
+    image: caviri/odtp-eqasim-matsim:v0.1.6
+    env_file:
+      - ./parameters/003.parameters
+    volumes:
+      - ./execution/002_odtp_eqasim_v0.4.6/odtp-output:/odtp/odtp-input
+      - ./execution/003_odtp_eqasim_matsim_v0.1.6/odtp-output:/odtp/odtp-output
+      - ./execution/003_odtp_eqasim_matsim_v0.1.6/odtp-logs:/odtp/odtp-logs
+    depends_on:
+      odtp-eqasim:
+        condition: service_completed_successfully
+
+  odtp-travel-data-dashboard:
+    image: caviri/odtp-travel-data-dashboard:v0.1.6
+    env_file:
+      - ./parameters/004.parameters
+    ports:
+      - "8502:8501"
+    volumes:
+      - ../execution/003_odtp_eqasim_matsim_v0.1.6/odtp-input:/odtp/odtp-input
+      - ./execution/004_odtp_travel_data_dashboard_v0.1.6/odtp-output:/odtp/odtp-output
+      - ./execution/004_odtp_travel_data_dashboard_v0.1.6/odtp-logs:/odtp/odtp-logs
+    depends_on:
+      odtp-eqasim-matsim:
+        condition: service_completed_successfully
+
+volumes:
+  execution:
