@@ -1,0 +1,81 @@
+# Schema Version
+schema-version: "v5.0.1-alpha"
+
+# Execution Component Information
+component-name: dt-corsica-mobility
+component-version: "v2.0.0"
+component-license: AGPL-3.0
+component-type: execution
+component-description: Executes the ODTP EQASIM data processing execution for corsica and provide a data dashboard for visualization.
+component-authors:
+  - name: Carlos Vivar Rios
+    orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+
+# Tags
+tags:
+  - execution
+  - corsica
+  - mobility
+
+parameters:
+  - name: LINK
+    description: Link to download the input data
+    type: str
+    step: odtp-eqasim-dataloader
+    options:
+      - name: Corsica Mobility Data 2023
+        value: https://drive.switch.ch/index.php/s/COCq6UaK5b4bs7W
+    allow-custom-value: true
+
+ports:
+  - name: DASHBOARD_PORT
+    description: Port mapping for the Travel Data Dashboard
+    step: odtp-travel-data-dashboard
+    host-port: 8502
+    container-port: 8501
+
+secrets:
+  - name: PASSWORD
+    description: Password to download switch input data
+    type: str
+    step: odtp-eqasim-dataloader
+
+
+# Execution Steps
+steps:
+  - step-name: odtp-eqasim-dataloader
+    component-repository: https://github.com/odtp-org/odtp-eqasim-dataloader
+    component-image: caviri/odtp-eqasim-dataloader
+    component-version: "v0.4.0"
+    depends_on: []
+    parameters:
+      CONFIG_FILE: ./parameters/001.parameters
+    secrets:
+      CONFIG_FILE: ./secrets/001.secrets
+
+  - step-name: odtp-eqasim
+    component-repository: https://github.com/odtp-org/odtp-eqasim
+    component-image: caviri/odtp-eqasim:v0.4.6
+    component-version: "v0.4.6"
+    depends_on:
+      - odtp-eqasim-dataloader
+    parameters:
+      CONFIG_FILE: ./parameters/002.parameters
+
+  - step-name: odtp-eqasim-matsim
+    component-repository: https://github.com/odtp-org/odtp-eqasim-matsim
+    component-image: caviri/odtp-eqasim-matsim:v0.1.6
+    component-version: "v0.1.6"
+    depends_on:
+      - odtp-eqasim
+    parameters:
+      CONFIG_FILE: ./parameters/003.parameters
+
+  - step-name: odtp-travel-data-dashboard
+    component-repository: https://github.com/odtp-org/odtp-travel-data-dashboard
+    component-image: caviri/odtp-travel-data-dashboard:v0.1.6
+    component-version: "v0.1.6"
+    depends_on:
+      - odtp-eqasim-matsim
+    parameters:
+      CONFIG_FILE: ./parameters/004.parameters
