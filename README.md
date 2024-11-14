@@ -4,7 +4,7 @@ This is a prototype on how to share a DT for Corsica using ODTP
 
 ```mermaid
 graph LR
-    SwitchDatabase[Switch Database] --> EqasimDataloader[Eqasim Dataloader]
+    SwitchDatabase[Switch Database] -- LINK --> EqasimDataloader[Eqasim Dataloader]
 
     subgraph ODTP
         EqasimDataloader --> Eqasim
@@ -12,6 +12,8 @@ graph LR
         EqasimDataloader --> EqasimMatsim
         EqasimMatsim --> TravelDataDashboard[Travel Data Dashboard]
     end
+
+    TravelDataDashboard -- PORT --> Browser[Browser]
 ```
 ## Tutorial to run the pipeline in ODTP
 
